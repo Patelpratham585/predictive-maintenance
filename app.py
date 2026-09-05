@@ -11,10 +11,11 @@ Run with:
 import joblib
 import numpy as np
 import streamlit as st
+from pathlib import Path
 
 st.set_page_config(page_title="Machine Failure Predictor", page_icon="⚙️", layout="centered")
 
-MODEL_PATH = "model.pkl"
+MODEL_PATH = Path(__file__).resolve().parent / "model.pkl"
 
 
 @st.cache_resource
@@ -71,7 +72,7 @@ if st.button("Predict", type="primary"):
 
 st.divider()
 st.caption(
-    "On held-out test data this model catches about 60% of real failures "
-    "at 89% precision (few false alarms, but it does miss some). Treat this "
+    "On held-out test data this model catches about 71% of real failures "
+    "at 73% precision. Treat this "
     "as a learning demo, not a substitute for real maintenance monitoring."
 )

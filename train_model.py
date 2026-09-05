@@ -19,6 +19,7 @@ the model "cheat" and give meaningless feature importances.
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
@@ -29,7 +30,8 @@ from sklearn.metrics import (
 # ----------------------------------------------------------------------
 # 1. Load data
 # ----------------------------------------------------------------------
-DATA_PATH = "ai4i2020.csv"
+BASE_DIR = Path(__file__).resolve().parent
+DATA_PATH = BASE_DIR / "ai4i2020.csv"
 df = pd.read_csv(DATA_PATH)
 
 FEATURES = [
@@ -106,11 +108,11 @@ importances.sort_values().plot(kind="barh", color="#4C72B0")
 plt.xlabel("Importance")
 plt.title("What drives predicted machine failure?")
 plt.tight_layout()
-plt.savefig("feature_importance.png", dpi=150)
+plt.savefig(BASE_DIR / "feature_importance.png", dpi=150)
 print("\nSaved chart to feature_importance.png")
 
 # ----------------------------------------------------------------------
 # 6. Save the trained model
 # ----------------------------------------------------------------------
-joblib.dump(model, "model.pkl")
+joblib.dump(model, BASE_DIR / "model.pkl")
 print("Saved trained model to model.pkl")
